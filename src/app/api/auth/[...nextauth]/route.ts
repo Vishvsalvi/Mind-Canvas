@@ -12,21 +12,21 @@ const handler = NextAuth({
                 password: {label: "Password", type: "password", placeholder: "password"}
             },
             async authorize(credentials:any) {
-
+            
                 const {email, password} = credentials
                 const userExists = await prisma.user.findUnique({
                     where: {
                         email
                     }
                 })      
-
+            
                 if(!userExists) {
                
                     throw new Error("Invalid credentials")
                 }
-
+            
                 return {
-                    id: userExists.id,
+                    id: userExists.id.toString(),
                     password,
                     email: userExists.email,
                     name: userExists.firstName
