@@ -7,9 +7,10 @@ import EditorJS from "@editorjs/editorjs";
 import tools from "../tools";
 import { CldUploadButton, CldImage } from "next-cloudinary";
 import { deleteImage } from "../actions/user";
+import { OutputData } from "@editorjs/editorjs";
 
 export default function Page() {
-    const [editorContent, setEditorContent] = useState({ blocks: [] });
+    const [editorContent, setEditorContent] = useState<OutputData>({ blocks: [] });
     const [coverImageId, setCoverImageId] = useState(() => {
         return localStorage.getItem('coverImageId') || "";
     });
@@ -36,7 +37,7 @@ export default function Page() {
         localStorage.setItem('coverImageId', coverImageId);
     }, [coverImageId]);
 
-    const handleUploadSuccess = (result) => {
+    const handleUploadSuccess = (result:any) => {
         if (result.event === "success") {
             const newCoverImageId = result.info.public_id;
             setCoverImageId(newCoverImageId);

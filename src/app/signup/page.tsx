@@ -31,7 +31,7 @@ export default function page() {
 
   const clickHandler = async () => {
     
-    const isSignUp: {email:any, password:any} = await signUp(firstName, lastName, phoneNumber, email, password);
+    const isSignUp: { email: string; password: string; } = await signUp(firstName, lastName, phoneNumber, email, password) as { email: string; password: string; };
     
     if(Object.keys(isSignUp).length){
       await signIn('credentials', {email: isSignUp.email, password: isSignUp.password, redirect:false})
