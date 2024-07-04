@@ -34,7 +34,7 @@ const handler = NextAuth({
             }
         })
     ],
-    secret: process.env.AUTH_SECRET,
+    secret: process.env.NEXTAUTH_URL,
     callbacks: {
 
     },

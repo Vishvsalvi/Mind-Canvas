@@ -1,10 +1,11 @@
-import Embed from "@editorjs/embed"
-import Image from "@editorjs/image"
-import List from "@editorjs/list"
-import Quote from "@editorjs/quote"
-import Raw from "@editorjs/raw"
-import SimpleImage from "@editorjs/simple-image"
-import Link from "@editorjs/link"
+import Embed from "@editorjs/embed";
+import Image from "@editorjs/image";
+import List from "@editorjs/list";
+import Quote from "@editorjs/quote";
+import Raw from "@editorjs/raw";
+import SimpleImage from "@editorjs/simple-image";
+import Link from "@editorjs/link";
+import Header from "@editorjs/header";
 
 interface UploadResult {
     success: number;
@@ -24,17 +25,32 @@ const uploadImageByURL = async (e: any): Promise<UploadResult> => {
 };
 
 const uploadByFile = () => {
-    
-}
+    // Define the logic for uploadByFile
+};
+
+type ToolConfig = {
+    class: any;
+    config?: {
+        uploader?: {
+            uploadByUrl?: (e: any) => Promise<UploadResult>;
+            uploadByFile?: () => void;
+        };
+        placeholder?: string;
+        levels?: Array<number>; // Provide a type argument for the Array type
+        defaultLevel?: number;
+    };
+};
+
 type Tools = {
-    embed: typeof Embed,
-    image: typeof Image,
-    list: typeof List,
-    quote: typeof Quote,
-    raw: typeof Raw,
-    simpleImage: typeof SimpleImage,
-    link: typeof Link
-}
+    embed: typeof Embed;
+    image: ToolConfig;
+    list: typeof List;
+    quote: typeof Quote;
+    raw: typeof Raw;
+    simpleImage: typeof SimpleImage;
+    link: typeof Link;
+    header: ToolConfig;
+};
 
 const tools: Tools = {
     embed: Embed,
@@ -51,7 +67,15 @@ const tools: Tools = {
     quote: Quote,
     raw: Raw,
     simpleImage: SimpleImage,
-    link: Link
-}
+    link: Link,
+    header: {
+        class: Header,
+        config: {
+            placeholder: "Enter a header",
+            levels: [2],
+            defaultLevel: 2
+        }
+    }
+};
 
 export default tools;

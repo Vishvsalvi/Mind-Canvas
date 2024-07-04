@@ -1,6 +1,10 @@
 import {atom} from 'recoil'
 
-const editorState = atom({
-    key: "editorState",
-    default: ""
+export const postState = atom({
+    key: "postState",
+    default: {
+        title: '',
+        editorContent: '',
+        coverImg: ''
+    }
 })
